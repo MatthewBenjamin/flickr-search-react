@@ -2,7 +2,7 @@
 import React from 'react'
 import { SearchForm } from '../components/SearchForm'
 
-let SearchFormContainer = React.createClass({
+const SearchFormContainer = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
@@ -22,6 +22,7 @@ let SearchFormContainer = React.createClass({
     this.context.router.push({
       pathname: '/search',
       query: {
+        // TODO: rename query, too many
         query: this.state.query
       }
     });
@@ -31,7 +32,7 @@ let SearchFormContainer = React.createClass({
       <SearchForm
         onUpdateQuery = {this.handleUpdateQuery}
         onSubmitQuery = {this.handleSubmitQuery}
-        query = {this.props.query} />
+        query = {this.state.query} />
     )
   }
 });
