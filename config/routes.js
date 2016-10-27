@@ -2,14 +2,14 @@
 import React from 'react'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import { Main } from '../components/Main'
-import { Search } from '../components/Search'
+import { SearchResultsContainer } from '../containers/SearchResultsContainer'
 import { Home } from '../components/Home'
 
 let routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
-      <Route path='search' component={Search} />
+      <Route path='search' component={SearchResultsContainer} />
     </Route>
   </Router>
 )
