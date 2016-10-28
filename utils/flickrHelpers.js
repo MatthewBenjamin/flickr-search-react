@@ -11,7 +11,7 @@ let flickrURL = 'https://api.flickr.com/services/rest/?' +
   'text=';
 
 const makeImgURL = (farmID, serverID, id, secret) => {
-  return `https://farm${farmID}.staticflickr.com/${serverID}/${id}_${secret}.jpg`;
+  return `https://farm${farmID}.staticflickr.com/${serverID}/${id}_${secret}_q.jpg`;
 };
 
 const makeImgLink = (owner, id) => {

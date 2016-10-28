@@ -18,7 +18,7 @@ let SearchResults = (props) => {
   ? <div><h2>Loading results for "{props.query}"</h2></div>
   : <div>
       <h2>got results for "{props.query}"</h2>
-      <ul>{ PhotoResults }</ul>
+      <ul className='results-list'>{ PhotoResults }</ul>
     </div>
 
 }
