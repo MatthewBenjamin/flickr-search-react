@@ -18,14 +18,16 @@ const SearchFormContainer = React.createClass({
   },
   handleSubmitQuery: function (e) {
     e.preventDefault();
-    var queryTerm = this.state.query;
-    this.context.router.push({
-      pathname: '/search',
-      query: {
-        // TODO: rename query, too many
-        query: this.state.query
-      }
-    });
+    var queryTerm = this.state.query.trim();
+    if (queryTerm) {
+      this.context.router.push({
+        pathname: '/search',
+        query: {
+          // TODO: rename query, too many
+          query: queryTerm
+        }
+      });
+    }
   },
   render: function () {
     return (
