@@ -27,6 +27,9 @@ const SearchResultsContainer = React.createClass({
     // TODO: refactor - not DRY, see nearly same as componentDidMount
     if (this.props.location.query.query !== prevProps.location.query.query) {
       let query = this.props.location.query.query;
+      this.setState({
+        isLoading: true
+      });
       flickrHelpers.performSearch(query)
         .then(function (flickrResults) {
           this.setState({
