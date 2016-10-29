@@ -1,7 +1,8 @@
 // Search.js
 import React from 'react'
-import { PhotoInfo } from '../components/PhotoInfo'
-import { ActivePhoto } from '../components/ActivePhoto'
+import { PhotoInfo } from './PhotoInfo'
+import { ActivePhoto } from './ActivePhoto'
+import { Loading } from './Loading'
 
 const PropTypes = React.PropTypes;
 
@@ -18,7 +19,7 @@ let SearchResults = (props) => {
   });
 
   return props.isLoading === true
-  ? <div><h2>Loading results for "{props.query}"</h2></div>
+  ? <Loading queryTerm={props.query} />
   : <div>
       <h2>got results for "{props.query}"</h2>
       <ul className='results-list'>{ PhotoResults }</ul>
