@@ -8,7 +8,8 @@ const SearchResultsContainer = React.createClass({
     return {
       isLoading: true,
       metaData: {},
-      photoResults: []
+      photoResults: [],
+      activePhoto: {},
     }
   },
   componentDidMount: function () {
@@ -24,7 +25,7 @@ const SearchResultsContainer = React.createClass({
   },
   componentDidUpdate: function (prevProps) {
     // TODO: refactor - not DRY, see nearly same as componentDidMount
-    if (this.props !== prevProps) {
+    if (this.props.location.query.query !== prevProps.location.query.query) {
       let query = this.props.location.query.query;
       flickrHelpers.performSearch(query)
         .then(function (flickrResults) {
@@ -36,13 +37,25 @@ const SearchResultsContainer = React.createClass({
         }.bind(this));
     }
   },
+  componentWillReceiveProps: function(nextProps) {
+    if (this.props.location.query.active_link !==
+        nextProps.location.query.active_link) {
+      let activePhoto = (this.state.photoResults.find(function(photoItem) {
+        return photoItem.id === nextProps.location.query.active_link;
+      }));
+      this.setState({
+        activePhoto: activePhoto
+      });
+    }
+  },
   render: function () {
     return (
       <SearchResults
         isLoading={this.state.isLoading}
         query={this.props.location.query.query}
         metaData={this.state.metaData}
-        photoResults={this.state.photoResults} />
+        photoResults={this.state.photoResults}
+        activePhoto={this.state.activePhoto} />
     )
   }
 });

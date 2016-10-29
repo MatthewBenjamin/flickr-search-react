@@ -6,6 +6,7 @@
     -Header / Footer
     -Main Content
         -Photo Results List
+        -Active Photo Popup
 */
 
 /* Global Settings */
@@ -101,6 +102,7 @@ body {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
     .results-list__item {
@@ -120,3 +122,13 @@ body {
                 border-color: transparent;
                 cursor: pointer;
             }
+
+/* Active Photo */
+.active-photo {
+    position: fixed;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    background: rgba(255, 255, 255, 0.6);
+    top: 10px;
+    left: 10px;
+}

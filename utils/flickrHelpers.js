@@ -10,8 +10,8 @@ let flickrURL = 'https://api.flickr.com/services/rest/?' +
   'per_page=20&' +
   'text=';
 
-const makeImgURL = (farmID, serverID, id, secret) => {
-  return `https://farm${farmID}.staticflickr.com/${serverID}/${id}_${secret}_q.jpg`;
+const makeImgURL = (farmID, serverID, id, secret, sizeSuffix) => {
+  return `https://farm${farmID}.staticflickr.com/${serverID}/${id}_${secret}${sizeSuffix}.jpg`;
 };
 
 const makeImgLink = (owner, id) => {
@@ -28,11 +28,18 @@ const parseResponse = (responseData) => {
 
   let photoResults = responseData.photo.map(function(photoInfo) {
     return {
-      // TODO: what about img sizes?
+      // TODO: add different img sizes for responsive design
       imgURL: makeImgURL(photoInfo.farm,
                          photoInfo.server,
                          photoInfo.id,
-                         photoInfo.secret),
+                         photoInfo.secret,
+                         ''),
+      imgThumbnailURL: makeImgURL(
+                          photoInfo.farm,
+                         photoInfo.server,
+                         photoInfo.id,
+                         photoInfo.secret,
+                         '_q'),
       imgLink: makeImgLink(photoInfo.owner, photoInfo.id),
       id: photoInfo.id,
       title: photoInfo.title
