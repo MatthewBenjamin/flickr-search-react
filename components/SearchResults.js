@@ -41,12 +41,14 @@ SearchResults.propTypes = {
     total: PropTypes.string
   }),
   query: PropTypes.string.isRequired,
-  // TODO: same proptypes in activephoto component - DRY?
   activePhoto: PropTypes.shape({
     title: PropTypes.string,
     id: PropTypes.string,
     imgLink: PropTypes.string,
-    imgURL: PropTypes.string
+    imgTinyURL: PropTypes.string,
+    imgSmallURL: PropTypes.string,
+    imgMediumURL: PropTypes.string,
+    imgLargeURL: PropTypes.string
   })
 };
 

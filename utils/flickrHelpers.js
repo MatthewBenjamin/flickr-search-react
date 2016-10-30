@@ -10,9 +10,13 @@ let flickrURL = 'https://api.flickr.com/services/rest/?' +
   'per_page=20&' +
   'text=';
 
-const makeImgURL = (farmID, serverID, id, secret, sizeSuffix) => {
-  return `https://farm${farmID}.staticflickr.com/${serverID}/${id}_${secret}${sizeSuffix}.jpg`;
+const makeBaseImgURL = (farmID, serverID, id, secret) => {
+  return `https://farm${farmID}.staticflickr.com/${serverID}/${id}_${secret}`;
 };
+
+const makeImgSizeURL = (baseImgURL, sizeSuffix) => {
+  return `${baseImgURL}${sizeSuffix}.jpg`
+}
 
 const makeImgLink = (owner, id) => {
   return `https://www.flickr.com/photos/${owner}/${id}`;
@@ -27,19 +31,16 @@ const parseResponse = (responseData) => {
   };
 
   let photoResults = responseData.photo.map(function(photoInfo) {
+    let baseImgURL = makeBaseImgURL(photoInfo.farm,
+                                    photoInfo.server,
+                                    photoInfo.id,
+                                    photoInfo.secret);
     return {
-      // TODO: add different img sizes for responsive design
-      imgURL: makeImgURL(photoInfo.farm,
-                         photoInfo.server,
-                         photoInfo.id,
-                         photoInfo.secret,
-                         ''),
-      imgThumbnailURL: makeImgURL(
-                          photoInfo.farm,
-                         photoInfo.server,
-                         photoInfo.id,
-                         photoInfo.secret,
-                         '_q'),
+      imgThumbnailURL: makeImgSizeURL(baseImgURL, '_q'),
+      imgTinyURL: makeImgSizeURL(baseImgURL, '_m'),
+      imgSmallURL: makeImgSizeURL(baseImgURL, '_n'),
+      imgMediumURL: makeImgSizeURL(baseImgURL, '_z'),
+      imgLargeURL: makeImgSizeURL(baseImgURL, '_c'),
       imgLink: makeImgLink(photoInfo.owner, photoInfo.id),
       id: photoInfo.id,
       title: photoInfo.title

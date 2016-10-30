@@ -15,19 +15,40 @@ let ActivePhoto = (props) => {
           </button>
         </Link>
       </div>
-      <h3>{props.activePhoto.title}</h3>
-      <img src={props.activePhoto.imgURL} />
+      <div className="active-photo__img-container">
+        <a href={props.activePhoto.imgLink}>
+          <figure>
+            <img
+              srcSet={`${props.activePhoto.imgTinyURL} 240w,
+                       ${props.activePhoto.imgSmallURL} 320w,
+                       ${props.activePhoto.imgMediumURL} 640w,
+                       ${props.activePhoto.imgLargeURL} 800w`}
+              sizes="(max-width: 340px) 240px,
+                     (max-width: 660px) 320px,
+                     (max-width: 820px) 640px,
+                     800px"
+              src={props.activePhoto.imgMediumURL}
+              alt={props.activePhoto.title}
+            />
+            <figcaption>
+              <h3>{props.activePhoto.title}</h3>
+            </figcaption>
+          </figure>
+        </a>
+      </div>
     </div>
   )
 }
 
-// TODO: same proptypes in SearchResults component - DRY?
 ActivePhoto.propTypes = {
   activePhoto: PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  imgLink: PropTypes.string.isRequired,
-  imgURL: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    imgLink: PropTypes.string.isRequired,
+    imgTinyURL: PropTypes.string.isRequired,
+    imgSmallURL: PropTypes.string.isRequired,
+    imgMediumURL: PropTypes.string.isRequired,
+    imgLargeURL: PropTypes.string.isRequired
   }),
   query: PropTypes.string.isRequired
 }
