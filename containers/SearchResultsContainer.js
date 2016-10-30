@@ -9,8 +9,8 @@ const SearchResultsContainer = React.createClass({
       isLoading: true,
       metaData: {},
       photoResults: [],
-      activePhoto: {},
-    }
+      activePhoto: null
+    };
   },
   componentDidMount: function () {
     let query = this.props.location.query.query;
@@ -41,13 +41,18 @@ const SearchResultsContainer = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
-    if (this.props.location.query.active_link !==
+    // use parseInt to make coercion explicit (activePhoto assignment below)
+    let activePhotoIndex = parseInt(nextProps.location.query.active_link);
+    if (activePhotoIndex >= 0 &&
+        this.props.location.query.active_link !==
         nextProps.location.query.active_link) {
-      let activePhoto = (this.state.photoResults.find(function(photoItem) {
-        return photoItem.id === nextProps.location.query.active_link;
-      }));
+      let activePhoto = this.state.photoResults[activePhotoIndex];
       this.setState({
-        activePhoto: activePhoto
+        activePhoto: activePhoto,
+      });
+    } else if (isNaN(activePhotoIndex)) {
+      this.setState({
+        activePhoto: null
       });
     }
   },

@@ -7,8 +7,8 @@ import { Loading } from './Loading'
 const PropTypes = React.PropTypes;
 
 let SearchResults = (props) => {
-  let PhotoResults = props.photoResults.map(function(result) {
-    let activeLinkURL = `/search?query=${props.query}&active_link=${result.id}`
+  let PhotoResults = props.photoResults.map(function(result, resultIndex) {
+    let activeLinkURL = `/search?query=${props.query}&active_link=${resultIndex}`
     return (
       <PhotoInfo
         title={result.title}
@@ -23,7 +23,7 @@ let SearchResults = (props) => {
   : <div>
       <h2>got results for "{props.query}"</h2>
       <ul className='results-list'>{ PhotoResults }</ul>
-      { props.activePhoto && props.activePhoto.id &&
+      { props.activePhoto &&
         <ActivePhoto
           activePhoto={props.activePhoto}
           query={props.query} /> }
