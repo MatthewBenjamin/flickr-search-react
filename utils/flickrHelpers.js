@@ -22,6 +22,14 @@ const makeImgLink = (owner, id) => {
   return `https://www.flickr.com/photos/${owner}/${id}`;
 };
 
+const alphabetizeResults = (resultsList) => {
+    resultsList.sort(function(a, b) {
+        var resultA = a.title.toUpperCase();
+        var resultB = b.title.toUpperCase();
+        return (resultA < resultB) ? -1 : (resultA > resultB) ? 1 : 0;
+    });
+};
+
 const parseResponse = (responseData) => {
   let metaData = {
     page: responseData.page,
@@ -46,6 +54,8 @@ const parseResponse = (responseData) => {
       title: photoInfo.title
     };
   });
+
+  alphabetizeResults(photoResults);
 
   return { photoResults, metaData };
 }
