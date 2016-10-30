@@ -8,9 +8,13 @@ const PropTypes = React.PropTypes;
 let ActivePhoto = (props) => {
   return (
     <div className="active-photo">
-      <Link to={`/search?query=${props.query}`}>
-        Close
-      </Link>
+      <div className="active-photo__heading-container">
+        <Link to={`/search?query=${props.query}`}>
+          <button className="active-photo__heading-container__close">
+            &#10005;
+          </button>
+        </Link>
+      </div>
       <h3>{props.activePhoto.title}</h3>
       <img src={props.activePhoto.imgURL} />
     </div>
