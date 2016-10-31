@@ -13,46 +13,52 @@ const SearchResultsContainer = React.createClass({
     };
   },
   componentDidMount() {
+    // send API request on load
     let query = this.props.location.query.query;
+    let activePhotoIndex = parseInt(this.props.location.query.active_link);
+    this.handleFlickrSearch(query, activePhotoIndex);
+  },
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.query !== nextProps.location.query) {
+      // new query term - send API request
+      let query = nextProps.location.query.query;
+      let activePhotoIndex = parseInt(nextProps.location.query.active_link);
+      if (this.props.location.query.query !== query) {
+        this.setState({
+          isLoading: true,
+        });
+        this.handleFlickrSearch(query, activePhotoIndex);
+      }
+      // update activePhoto
+      if (this.props.location.query.active_link !== activePhotoIndex) {
+        this.handleActivePhotoSelection(activePhotoIndex);
+      }
+    }
+  },
+  // submit flickr API request
+  handleFlickrSearch(query, activePhotoIndex) {
     flickrHelpers.performSearch(query)
       .then(function (flickrResults) {
         this.setState({
-            isLoading: false,
-            metaData: flickrResults.metaData,
-            photoResults: flickrResults.photoResults
+          isLoading: false,
+          metaData: flickrResults.metaData,
+          photoResults: flickrResults.photoResults,
         });
+      }.bind(this))
+      .then(function () {
+        // If page loaded w/ active_link param, set activePhoto
+        this.handleActivePhotoSelection(activePhotoIndex);
       }.bind(this));
   },
-  componentDidUpdate: function (prevProps) {
-    // TODO: refactor - not DRY, see nearly same as componentDidMount
-    if (this.props.location.query.query !== prevProps.location.query.query) {
-      let query = this.props.location.query.query;
+  // set, clear activePhoto
+  handleActivePhotoSelection(activePhotoIndex) {
+    if (activePhotoIndex >= 0) {
       this.setState({
-        isLoading: true
+        activePhoto: this.state.photoResults[activePhotoIndex],
       });
-      flickrHelpers.performSearch(query)
-        .then(function (flickrResults) {
-          this.setState({
-            isLoading: false,
-            metaData: flickrResults.metaData,
-            photoResults: flickrResults.photoResults
-          });
-        }.bind(this));
-    }
-  },
-  componentWillReceiveProps: function(nextProps) {
-    // use parseInt to make coercion explicit (activePhoto assignment below)
-    let activePhotoIndex = parseInt(nextProps.location.query.active_link);
-    if (activePhotoIndex >= 0 &&
-        this.props.location.query.active_link !==
-        nextProps.location.query.active_link) {
-      let activePhoto = this.state.photoResults[activePhotoIndex];
+    } else {
       this.setState({
-        activePhoto: activePhoto,
-      });
-    } else if (isNaN(activePhotoIndex)) {
-      this.setState({
-        activePhoto: null
+        activePhoto: null,
       });
     }
   },
@@ -63,9 +69,10 @@ const SearchResultsContainer = React.createClass({
         query={this.props.location.query.query}
         metaData={this.state.metaData}
         photoResults={this.state.photoResults}
-        activePhoto={this.state.activePhoto} />
-    )
-  }
+        activePhoto={this.state.activePhoto}
+      />
+    );
+  },
 });
 
 export { SearchResultsContainer };
