@@ -14,15 +14,17 @@ const SearchResultsContainer = React.createClass({
   },
   componentDidMount() {
     // send API request on load
-    let query = this.props.location.query.query;
-    let activePhotoIndex = parseInt(this.props.location.query.active_link);
+    const query = this.props.location.query.query;
+    // TODO: add radix param
+    const activePhotoIndex = parseInt(this.props.location.query.active_link);
     this.handleFlickrSearch(query, activePhotoIndex);
   },
   componentWillReceiveProps(nextProps) {
     if (this.props.location.query !== nextProps.location.query) {
       // new query term - send API request
-      let query = nextProps.location.query.query;
-      let activePhotoIndex = parseInt(nextProps.location.query.active_link);
+      const query = nextProps.location.query.query;
+      // TODO: add radix param
+      const activePhotoIndex = parseInt(nextProps.location.query.active_link);
       if (this.props.location.query.query !== query) {
         this.setState({
           isLoading: true,
