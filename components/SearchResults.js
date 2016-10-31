@@ -1,34 +1,35 @@
 // Search.js
-import { PhotoInfo } from './PhotoInfo'
 import React from 'react';
+import { PhotoList } from './PhotoList';
 import { ActivePhoto } from './ActivePhoto';
 import { Loading } from './Loading';
 
 const PropTypes = React.PropTypes;
 
-let SearchResults = (props) => {
-  let PhotoResults = props.photoResults.map(function(result, resultIndex) {
-    let activeLinkURL = `/search?query=${props.query}&active_link=${resultIndex}`
-    return (
-      <PhotoInfo
-        title={result.title}
-        imgThumbnailURL={result.imgThumbnailURL}
-        key={result.id}
-        activeLink={activeLinkURL} />
-    )
-  });
+function SearchResults(props) {
+  if (props.isLoading) {
+    return <Loading queryTerm={props.query} />;
+  }
 
-  return props.isLoading === true
-  ? <Loading queryTerm={props.query} />
-  : <div>
-      <h2>got results for "{props.query}"</h2>
-      <ul className='results-list'>{ PhotoResults }</ul>
-      { props.activePhoto &&
+  return (
+    <div>
+      <h2>got results for {props.query}</h2>
+
+      <PhotoList
+        photoResults={props.photoResults}
+        query={props.query}
+      />
+
+      { // only display if there's an active photo
+        props.activePhoto &&
         <ActivePhoto
           activePhoto={props.activePhoto}
-          query={props.query} /> }
-    </div>
+          query={props.query}
+        />
+      }
 
+    </div>
+  );
 }
 
 SearchResults.propTypes = {
