@@ -1,6 +1,6 @@
 // Header.js
 import React from 'react';
-import { SearchFormContainer } from './SearchFormContainer';
+import { SearchFormContainer } from '../containers/SearchFormContainer';
 
 function Header() {
   return (

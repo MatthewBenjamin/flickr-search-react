@@ -1,6 +1,6 @@
 // SearchResultsContainer.js
 import React from 'react';
-import { SearchResults } from './SearchResults';
+import { SearchResults } from '../components/SearchResults';
 import { flickrHelpers } from '../utils/flickrHelpers';
 
 const SearchResultsContainer = React.createClass({
