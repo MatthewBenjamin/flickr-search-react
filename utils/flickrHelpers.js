@@ -8,6 +8,8 @@ const flickrURL = 'https://api.flickr.com/services/rest/?' +
   'nojsoncallback=1&' +
   'format=json&' +
   'per_page=20&' +
+  'safe_search=1&' +
+  'sort=relevance&' +
   'text=';
 
 function makeBaseImgURL(farmID, serverID, id, secret) {
