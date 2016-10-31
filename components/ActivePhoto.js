@@ -24,7 +24,6 @@ function ActivePhoto(props) {
 ActivePhoto.propTypes = {
   activePhoto: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     imgLink: PropTypes.string.isRequired,
     imgTinyURL: PropTypes.string.isRequired,
     imgSmallURL: PropTypes.string.isRequired,

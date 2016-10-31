@@ -3,6 +3,8 @@ import React from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
+const PropTypes = React.PropTypes;
+
 function Main(props) {
   return (
     <div>
@@ -14,5 +16,9 @@ function Main(props) {
     </div>
   );
 }
+
+Main.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export { Main };

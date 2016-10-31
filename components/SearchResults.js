@@ -6,6 +6,7 @@ import { Loading } from './Loading';
 
 const PropTypes = React.PropTypes;
 
+// TODO: add metaData display
 function SearchResults(props) {
   if (props.isLoading) {
     return <Loading queryTerm={props.query} />;
@@ -35,6 +36,7 @@ function SearchResults(props) {
 SearchResults.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   photoResults: PropTypes.array.isRequired,
+  // TODO: after creating metadata display, double-check proptypes
   metaData: PropTypes.shape({
     page: PropTypes.number,
     pages: PropTypes.number,
@@ -42,15 +44,7 @@ SearchResults.propTypes = {
     total: PropTypes.string,
   }),
   query: PropTypes.string.isRequired,
-  activePhoto: PropTypes.shape({
-    title: PropTypes.string,
-    id: PropTypes.string,
-    imgLink: PropTypes.string,
-    imgTinyURL: PropTypes.string,
-    imgSmallURL: PropTypes.string,
-    imgMediumURL: PropTypes.string,
-    imgLargeURL: PropTypes.string,
-  }),
+  activePhoto: PropTypes.object,
 };
 
 export { SearchResults };
