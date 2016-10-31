@@ -1,17 +1,18 @@
 // Loading.js
-import React from 'react'
-const PropTypes =React.PropTypes;
+import React from 'react';
 
-const Loading = (props) => {
+const PropTypes = React.PropTypes;
+
+function Loading(props) {
   return (
     <div>
-      <h2>Loading results for "{props.queryTerm}"</h2>
+      <h2>Loading results for {props.queryTerm}</h2>
     </div>
-  )
+  );
 }
 
 Loading.propTypes = {
-  queryTerm: PropTypes.string.isRequired
+  queryTerm: PropTypes.string.isRequired,
 };
 
-export { Loading }
+export { Loading };

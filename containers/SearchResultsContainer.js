@@ -1,21 +1,21 @@
 // SearchResultsContainer.js
-import React from 'react'
-import { SearchResults } from '../components/SearchResults.js'
-import { flickrHelpers } from '../utils/flickrHelpers'
+import React from 'react';
+import { SearchResults } from './SearchResults';
+import { flickrHelpers } from '../utils/flickrHelpers';
 
 const SearchResultsContainer = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       isLoading: true,
       metaData: {},
       photoResults: [],
-      activePhoto: null
+      activePhoto: null,
     };
   },
-  componentDidMount: function () {
+  componentDidMount() {
     let query = this.props.location.query.query;
     flickrHelpers.performSearch(query)
-      .then(function(flickrResults) {
+      .then(function (flickrResults) {
         this.setState({
             isLoading: false,
             metaData: flickrResults.metaData,
@@ -56,7 +56,7 @@ const SearchResultsContainer = React.createClass({
       });
     }
   },
-  render: function () {
+  render() {
     return (
       <SearchResults
         isLoading={this.state.isLoading}
@@ -68,4 +68,4 @@ const SearchResultsContainer = React.createClass({
   }
 });
 
-export { SearchResultsContainer }
+export { SearchResultsContainer };

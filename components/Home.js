@@ -1,14 +1,13 @@
 // Home.js
-import React from 'react'
+import React from 'react';
 
-let Home = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <h1>I'm the HOME component</h1>
-      </div>
-    )
-  }
-});
+// TODO: add content
+function Home() {
+  return (
+    <div>
+      <h2>This is the home component.</h2>
+    </div>
+  );
+}
 
-export { Home }
+export { Home };

@@ -1,42 +1,42 @@
 // SearchFormContainer.js
-import React from 'react'
-import { SearchForm } from '../components/SearchForm'
+import React from 'react';
+import { SearchForm } from '../components/SearchForm';
 
 const SearchFormContainer = React.createClass({
   contextTypes: {
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
   },
-  getInitialState: function () {
+  getInitialState() {
     return {
-      query: ''
-    }
+      query: '',
+    };
   },
-  handleUpdateQuery: function (e) {
+  handleUpdateQuery(e) {
     this.setState({
-      query: e.target.value
+      query: e.target.value,
     });
   },
-  handleSubmitQuery: function (e) {
+  handleSubmitQuery(e) {
     e.preventDefault();
-    var queryTerm = this.state.query.trim();
+    const queryTerm = this.state.query.trim();
     if (queryTerm) {
       this.context.router.push({
         pathname: '/search',
         query: {
-          // TODO: rename query, too many
-          query: queryTerm
-        }
+          query: queryTerm,
+        },
       });
     }
   },
-  render: function () {
+  render() {
     return (
       <SearchForm
-        onUpdateQuery = {this.handleUpdateQuery}
-        onSubmitQuery = {this.handleSubmitQuery}
-        query = {this.state.query} />
-    )
-  }
+        onUpdateQuery={this.handleUpdateQuery}
+        onSubmitQuery={this.handleSubmitQuery}
+        query={this.state.query}
+      />
+    );
+  },
 });
 
-export { SearchFormContainer }
+export { SearchFormContainer };

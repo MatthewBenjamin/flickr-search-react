@@ -1,8 +1,8 @@
 // Search.js
-import React from 'react'
 import { PhotoInfo } from './PhotoInfo'
-import { ActivePhoto } from './ActivePhoto'
-import { Loading } from './Loading'
+import React from 'react';
+import { ActivePhoto } from './ActivePhoto';
+import { Loading } from './Loading';
 
 const PropTypes = React.PropTypes;
 
@@ -38,7 +38,7 @@ SearchResults.propTypes = {
     page: PropTypes.number,
     pages: PropTypes.number,
     perpage: PropTypes.number,
-    total: PropTypes.string
+    total: PropTypes.string,
   }),
   query: PropTypes.string.isRequired,
   activePhoto: PropTypes.shape({
@@ -48,8 +48,8 @@ SearchResults.propTypes = {
     imgTinyURL: PropTypes.string,
     imgSmallURL: PropTypes.string,
     imgMediumURL: PropTypes.string,
-    imgLargeURL: PropTypes.string
-  })
+    imgLargeURL: PropTypes.string,
+  }),
 };
 
-export { SearchResults }
+export { SearchResults };
